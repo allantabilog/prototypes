@@ -2,5 +2,13 @@
   {
     "description": "Use MarshallIndent to marshall tasks to json",
     "completed": false
+  },
+  {
+    "description": "Use MarshallIndent to marshall tasks to json",
+    "completed": false
+  },
+  {
+    "description": "Implement loadTasks() function",
+    "completed": false
   }
 ]

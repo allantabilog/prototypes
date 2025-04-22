@@ -13,7 +13,25 @@ type Task struct {
 	Completed   bool   `json:"completed"`
 }
 
+// loadTasks loads tasks from the JSON file
 func loadTasks() ([]Task, error) {
+	// first check if the file exists
+	if _, err := os.Stat(tasksFile); os.IsNotExist(err) {
+		return []Task{}, nil
+	}
+	// the file exists, read the file
+	data, err := ioutil.ReadFile(tasksFile)
+	if err != nil {
+		return nil, err
+	}
+	// unmarshal the data into a slice of Task
+	var tasks []Task
+	err = json.Unmarshal(data, &tasks)
+	if err != nil {
+		return nil, err
+	}
+	// return the tasks
+	return tasks, nil
 	return nil, nil
 }
 
