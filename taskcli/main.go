@@ -19,7 +19,7 @@ func loadTasks() ([]Task, error) {
 
 func saveTasks(tasks []Task) error {
 	// write tasks to file
-	data, err := json.Marshal(tasks)
+	data, err := json.MarshalIndent(tasks, "", "  ")
 	if err != nil {	
 		return err
 	}

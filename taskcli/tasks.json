@@ -1,1 +1,6 @@
-[{"description":"Build prototype for taskcli","completed":false}]
+[
+  {
+    "description": "Use MarshallIndent to marshall tasks to json",
+    "completed": false
+  }
+]
