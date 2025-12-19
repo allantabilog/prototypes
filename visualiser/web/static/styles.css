@@ -1,0 +1,394 @@
+/* Data Structure Visualizer Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.status {
+  margin-left: auto;
+  font-weight: 500;
+}
+
+main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 300px;
+  background: white;
+  border-right: 1px solid #e0e0e0;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.sidebar h3 {
+  margin-bottom: 1rem;
+  color: #555;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 0.5rem;
+}
+
+.visualization-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+.tabs {
+  display: flex;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tab-btn {
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.tab-btn:hover {
+  background: #e9ecef;
+  color: #333;
+}
+
+.tab-btn.active {
+  color: #667eea;
+  border-bottom-color: #667eea;
+  background: white;
+}
+
+#visualization-container {
+  flex: 1;
+  padding: 2rem;
+  overflow: auto;
+  position: relative;
+}
+
+/* Data Structure Specific Styles */
+.data-structure {
+  margin-bottom: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.data-structure-header {
+  background: #667eea;
+  color: white;
+  padding: 1rem;
+  font-weight: 500;
+}
+
+.data-structure-content {
+  padding: 1rem;
+}
+
+/* List Visualization */
+.list-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.list-item {
+  background: #4caf50;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.list-item::after {
+  content: attr(data-index);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.list-item.highlighted {
+  background: #ff9800;
+  transform: scale(1.1);
+}
+
+/* Stack Visualization */
+.stack-container {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 2px;
+  margin: 1rem 0;
+  min-height: 100px;
+}
+
+.stack-item {
+  background: #2196f3;
+  color: white;
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.stack-item:last-child {
+  background: #ff5722; /* Top of stack */
+}
+
+.stack-item.highlighted {
+  background: #ff9800;
+  transform: scale(1.05);
+}
+
+/* Queue Visualization */
+.queue-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.queue-container::before {
+  content: "Front";
+  position: absolute;
+  left: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.queue-container::after {
+  content: "Rear";
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.queue-item {
+  background: #9c27b0;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.queue-item:first-child {
+  background: #e91e63; /* Front of queue */
+}
+
+.queue-item.highlighted {
+  background: #ff9800;
+  transform: scale(1.1);
+}
+
+/* Tree Visualization */
+.tree-container {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.tree-node {
+  fill: #4caf50;
+  stroke: #2e7d32;
+  stroke-width: 2;
+}
+
+.tree-node-text {
+  fill: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.tree-link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 2;
+}
+
+.tree-node.highlighted {
+  fill: #ff9800;
+}
+
+/* Operations Log */
+.operation-item {
+  background: #f8f9fa;
+  border-left: 4px solid #667eea;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9rem;
+}
+
+.operation-item.recent {
+  background: #e3f2fd;
+  border-left-color: #2196f3;
+}
+
+.operation-type {
+  font-weight: bold;
+  color: #667eea;
+}
+
+.operation-time {
+  font-size: 0.8rem;
+  color: #666;
+  float: right;
+}
+
+/* Data Structures List */
+.ds-item {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ds-item:hover {
+  background: #e9ecef;
+  transform: translateX(2px);
+}
+
+.ds-item.active {
+  background: #e3f2fd;
+  border-color: #2196f3;
+}
+
+.ds-type {
+  font-weight: bold;
+  color: #667eea;
+}
+
+.ds-id {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    order: 2;
+    max-height: 200px;
+  }
+
+  .visualization-area {
+    order: 1;
+  }
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.data-structure {
+  animation: slideIn 0.3s ease;
+}
+
+.list-item,
+.stack-item,
+.queue-item {
+  animation: slideIn 0.3s ease;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

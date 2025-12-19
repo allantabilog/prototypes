@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Structure Visualizer</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Data Structure Visualizer</h1>
+            <div class="controls">
+                <button id="clear-btn">Clear All</button>
+                <button id="reconnect-btn">Reconnect</button>
+                <div class="status">
+                    Status: <span id="status">Connecting...</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="sidebar">
+                <h3>Data Structures</h3>
+                <div id="data-structures-list">
+                    <!-- Data structures will be populated here -->
+                </div>
+                
+                <h3>Operations Log</h3>
+                <div id="operations-log">
+                    <!-- Operations will be logged here -->
+                </div>
+            </main>
+
+            <div class="visualization-area">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="all">All Structures</button>
+                    <button class="tab-btn" data-tab="list">Lists</button>
+                    <button class="tab-btn" data-tab="stack">Stacks</button>
+                    <button class="tab-btn" data-tab="queue">Queues</button>
+                    <button class="tab-btn" data-tab="binary_tree">Trees</button>
+                </div>
+                
+                <div id="visualization-container">
+                    <!-- Visualizations will be rendered here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/websocket.js"></script>
+    <script src="/static/visualizers.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
