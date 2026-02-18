@@ -1,0 +1,8 @@
+logbook should take commands
+there are two commands:
+- add (add a new entry)
+- list (list all the entries created so far)
+
+Usage:
+logbook add --entry foobar
+logbook list 
