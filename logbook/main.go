@@ -37,10 +37,17 @@ func saveEntry(entry Entry) error {
 }
 
 func addEntry(entry string, tags string) error {
+	var tagSlice []string
+	if tags != "" {
+		tagSlice = strings.Split(tags, ",")
+	} else {
+		tagSlice = []string{}
+	}
+
 	newEntry := Entry{
 		Text:      entry,
 		Timestamp: time.Now(),
-		Tags:      strings.Split(tags, ","),
+		Tags:      tagSlice,
 	}
 
 	err := saveEntry(newEntry)
