@@ -5,8 +5,11 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"time"
 )
+
+var entriesDirectory string = "./entries"
 
 type Entry struct {
 	Text      string    `json:"text"`
@@ -21,7 +24,7 @@ func saveEntry(entry Entry) error {
 	}
 
 	// Save to file
-	filename := fmt.Sprintf("entries/entry_%d.json", entry.Timestamp.Unix())
+	filename := fmt.Sprintf("%s/entry_%d.json", entriesDirectory, entry.Timestamp.Unix())
 	err = os.WriteFile(filename, jsonData, 0644)
 	if err != nil {
 		return fmt.Errorf("error writing file: %w", err)
@@ -48,20 +51,45 @@ func addEntry(entry string) error {
 }
 
 func listEntries() error {
+	// open the entries directory and print out the filename and contents of each file
+	entries, err := os.ReadDir(entriesDirectory)
+	if err != nil {
+		fmt.Printf("Error reading directory: %v\n", err)
+		return err
+	}
+
+	for _, entry := range entries {
+		if entry.IsDir() {
+			continue
+		}
+
+		filePath := filepath.Join(entriesDirectory, entry.Name())
+
+		content, err := os.ReadFile(filePath)
+		if err != nil {
+			fmt.Printf("Error reading %s: %v\n", entry.Name(), err)
+			continue
+		}
+
+		fmt.Printf("\n=== %s ===\n%s\n", entry.Name(), string(content))
+	}
+
 	return nil
 }
 
-func usage() {
-	fmt.Println("Usage text")
-}
-
 func main() {
-	fmt.Println("Welcome to Logbook!")
-
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Welcome to Logbook!\n\n")
+		fmt.Fprintf(os.Stderr, "Usage: %s <command> [options]\n\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "Commands:\n")
+		fmt.Fprintf(os.Stderr, "  add   Add a new logbook entry\n")
+		fmt.Fprintf(os.Stderr, "  list  List all entries\n")
+	}
 	// Check if we have at least one argument (the subcommand)
 	if len(os.Args) < 2 {
-		usage()
-		return
+		flag.Usage()
+		// flag.PrintDefaults()
+		os.Exit(1)
 	}
 
 	// Get the subcommand
@@ -83,9 +111,10 @@ func main() {
 		fmt.Println("Adding a new entry")
 		addEntry(*entry)
 	} else if subcommand == "list" {
-		fmt.Println("Listing all entrieds")
+		fmt.Println("Listing all entries")
+		listEntries()
 	} else {
-		usage()
-		return
+		flag.Usage()
+		os.Exit(1)
 	}
 }
