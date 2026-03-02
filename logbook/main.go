@@ -14,6 +14,7 @@ var entriesDirectory string = "./entries"
 type Entry struct {
 	Text      string    `json:"text"`
 	Timestamp time.Time `json:"timestamp"`
+	Tag       string    `json:"tag"`
 }
 
 func saveEntry(entry Entry) error {
@@ -34,10 +35,11 @@ func saveEntry(entry Entry) error {
 	return nil
 }
 
-func addEntry(entry string) error {
+func addEntry(entry string, tag string) error {
 	newEntry := Entry{
 		Text:      entry,
 		Timestamp: time.Now(),
+		Tag:       tag,
 	}
 
 	err := saveEntry(newEntry)
@@ -100,6 +102,7 @@ func main() {
 		// Create a new FlagSet for the 'add' subcommand
 		addCmd := flag.NewFlagSet("add", flag.ExitOnError)
 		entry := addCmd.String("entry", "", "Create a new logbook entry")
+		tag := addCmd.String("tag", "", "Optional tag for the entry")
 
 		// Parse flags after the subcommand
 		addCmd.Parse(os.Args[2:])
@@ -109,7 +112,7 @@ func main() {
 			return
 		}
 		fmt.Println("Adding a new entry")
-		addEntry(*entry)
+		addEntry(*entry, *tag)
 	} else if subcommand == "list" {
 		fmt.Println("Listing all entries")
 		listEntries()
