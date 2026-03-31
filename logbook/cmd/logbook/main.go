@@ -15,6 +15,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Commands:\n")
 		fmt.Fprintf(os.Stderr, "  add   Add a new logbook entry\n")
 		fmt.Fprintf(os.Stderr, "  list  List all entries\n")
+		fmt.Fprintf(os.Stderr, "  search-tags  Find entries by tags\n")
 	}
 
 	if len(os.Args) < 2 {
@@ -40,6 +41,8 @@ func main() {
 	} else if subcommand == "list" {
 		fmt.Println("Listing all entries")
 		logbook.ListEntries()
+	} else if subcommand == "search-tags" {
+		logbook.SearchByTags(os.Args[2:])
 	} else {
 		flag.Usage()
 		os.Exit(1)

@@ -86,3 +86,8 @@ func ListEntries() error {
 
 	return nil
 }
+
+func SearchByTags(tags []string) error {
+	fmt.Printf("Searching by tags: %+v", tags)
+	return nil
+}
