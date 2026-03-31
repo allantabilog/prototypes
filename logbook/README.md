@@ -9,12 +9,12 @@ A Go application for managing logs.
 
 ### Running the Application
 ```bash
-go run main.go
+go run ./cmd/logbook
 ```
 
 ### Building the Application
 ```bash
-go build -o logbook
+go build -o logbook ./cmd/logbook
 ./logbook
 ```
 
